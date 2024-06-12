@@ -1,0 +1,60 @@
+<div class="right_col" style="min-height: 1659px" role="main">
+  <!-- form -->
+
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-5">
+      <div class="Form">
+        <h4>Ajouter type de centre De Responsabilite</h4>
+        <form [formGroup]="TypeCentreForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <!-- <label for="exampleInputEmail1">Centre De Responsabilite</label> -->
+            <input
+              type="text"
+              formControlName="libelle_type_centre_responsabilite"
+              class="form-control"
+              aria-describedby="libelle_centre_responsabilite"
+              placeholder="Entrer type de centre de responsabilite"
+            />
+          </div>
+          <button type="submit" class="btn btn-round btn-info btn-block">
+            Ajouter
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="tablerendering">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Type Centre De Responsabilite</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let type of listTypeCentre">
+          <th scope="row">{{ type.id_type_centre_responsabilite }}</th>
+          <td>{{ type.libelle_type_centre_responsabilite }}</td>
+          <td>
+            <!-- <button type="button" class="btn btn-default" style="color:deepskyblue" aria-label="Left Align">
+            <span class="far fa-edit" aria-hidden="true" data-toggle="modal" data-target="#exampleModalCenter"></span>
+          </button> -->
+            <button
+              type="button"
+              class="btn btn-default"
+              style="color: red"
+              aria-label="Left Align"
+              (click)="Delete(type)"
+            >
+              <span class="far fa-trash-alt" aria-hidden="true"></span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+  </div>
+</div>
+<!-- end-form -->

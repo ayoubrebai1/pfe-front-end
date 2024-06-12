@@ -1,0 +1,89 @@
+<!-- rendrening responsabilty center list -->
+<div class="right_col" style="min-height: 1659px" role="main">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div *ngIf="role == 'ADMIN'" class="col-md-5">
+      <div class="Form">
+        <h4>Ajouter centre de responsabilite</h4>
+        <form [formGroup]="centerForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <!-- <label for="exampleInputEmail1">Centre De Responsabilite</label> -->
+            <input
+              type="text"
+              formControlName="libelle_centre_responsabilite"
+              class="form-control"
+              aria-describedby="libelle_centre_responsabilite"
+              placeholder="Entrer centre responsabilité"
+            />
+          </div>
+          <div class="form-group row">
+            <div class="col-md-12 col-sm-12">
+              <select class="form-control" formControlName="typeCentre">
+                <option [ngValue]="null" disabled>
+                  choisit type centre de responsabilite
+                </option>
+                <option *ngFor="let type of typeCentres" [ngValue]="type">
+                  {{ type.libelle_type_centre_responsabilite }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-12 col-sm-12">
+              <select class="form-control" formControlName="organigramme">
+                <option [ngValue]="null" disabled>choisit organigramme</option>
+                <option *ngFor="let type of organigrammes" [ngValue]="type">
+                  {{ type.libelle }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Ajouter
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+  <br />
+  <div class="tablerendering">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Centre De Responsabilite</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cr of centreResponsabilites">
+          <th scope="row">{{ cr.id_centre_responsabilite }}</th>
+          <td>{{ cr.libelle_centre_responsabilite }}</td>
+          <td>
+            <!-- <button type="button" class="btn btn-default" style="color:deepskyblue" aria-label="Left Align">
+            <span class="far fa-edit" aria-hidden="true" data-toggle="modal" data-target="#exampleModalCenter"></span>
+          </button> -->
+            <button
+              *ngIf="role == 'ADMIN'"
+              type="button"
+              class="btn btn-default"
+              style="color: red"
+              aria-label="Left Align"
+              (click)="deleteCR(cr)"
+            >
+              <span class="far fa-trash-alt" aria-hidden="true"></span>
+            </button>
+            <button class="btn btn-raised" (click)="redirectedToBudgets(cr)">
+              Voir Budgets
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+  </div>
+  <!-- form -->
+</div>
+<!-- end-form -->

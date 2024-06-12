@@ -1,0 +1,76 @@
+<div class="right_col" style="min-height: 1659px" role="main">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div id="register" class="animate form">
+          <section class="login_content">
+            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+              <h1>Ajouter un profile</h1>
+              <div>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="libelle..."
+                  required=""
+                  formControlName="libelle"
+                />
+              </div>
+              <button
+                [disabled]="profileForm.invalid"
+                type="submit"
+                class="btn btn-round btn-primary btn-block"
+              >
+                ajouter profile
+              </button>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <div class="tablerendering">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Libelle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let profil of profils">
+            <td>{{ profil.id_profile }}</td>
+            <td>{{ profil.libelle }}</td>
+
+            <td>
+              <button
+                type="button"
+                class="btn btn-default"
+                style="color: deepskyblue"
+                aria-label="Left Align"
+              >
+                <span
+                  class="far fa-edit"
+                  aria-hidden="true"
+                  data-toggle="modal"
+                  data-target="#exampleModalCenter"
+                ></span>
+              </button>
+              <button
+                type="button"
+                class="btn btn-default"
+                style="color: red"
+                aria-label="Left Align"
+                (click)="deleteProfil(profil)"
+              >
+                <span class="far fa-trash-alt" aria-hidden="true"></span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr />
+    </div>
+  </div>
+</div>

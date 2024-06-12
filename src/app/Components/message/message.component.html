@@ -1,0 +1,41 @@
+<div class="right_col" style="min-height: 1659px" role="main">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body text-center">
+          <h4 class="card-title">Commentaires</h4>
+        </div>
+        <div class="comment-widgets">
+          <!-- Comment Row -->
+
+          <!-- Comment Row -->
+          <div
+            class="d-flex flex-row comment-row"
+            *ngFor="let message of messages"
+          >
+            <div class="p-2">
+              <img
+                src="assets/imgp.png"
+                alt="user"
+                width="50"
+                class="img-circle"
+              />
+            </div>
+            <div class="comment-text active w-100">
+              <h6 class="font-medium">{{ message.email }}</h6>
+              <span class="m-b-15 d-block">{{ message.contenue }} </span>
+              <div class="comment-footer">
+                <span class="text-muted float-right">{{
+                  message.date | date: "EEEE, MMMM d, y, h:mm:ss "
+                }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comment Row -->
+        </div>
+        <!-- Card -->
+      </div>
+    </div>
+  </div>
+</div>

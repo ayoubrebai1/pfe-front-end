@@ -1,0 +1,37 @@
+<div class="right_col" style="min-height: 700px" role="main">
+    <!-- <div class="search-hero">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;  Start searching for a hero by id or name or country">
+      </div> -->
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText"
+       autocomplete="off" placeholder="Chercher par action ou date ou utilisateur">
+
+    <div class="tablerendering">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Date</th>
+              <th scope="col">Action</th>
+              <th scope="col">Utilisateur</th>
+            </tr>
+          </thead>
+          <tr *ngFor="let histo of HistoriqueList | filter:searchText | paginate: { itemsPerPage: 20, currentPage: p }">
+          <th scope="row">{{ histo.id_historique }}</th>
+          <td>{{ histo.timestamp | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+          <td>{{ histo.action }}</td>
+          <td>{{ histo.user }}</td>
+          </tr>
+          <pagination-controls (pageChange)="p = $event" ></pagination-controls>
+          </table>
+          <button
+          type="submit"
+          class="btn btn-round btn-danger"
+          class="position-absolute bottom-0 end-0 btn-danger btn btn-round "
+          style="float: right;"
+          
+        >
+          Supprimer tous l'historique
+        </button>
+          </div>
+        
+</div>

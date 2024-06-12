@@ -1,0 +1,135 @@
+<html lang="en" id="log">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gentelella Alela! |</title>
+
+    <!-- <link
+            href="../vendors/bootstrap/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+          />
+      
+          <link
+            href="../vendors/font-awesome/css/font-awesome.min.css"
+            rel="stylesheet"
+          />
+      
+          <link href="../vendors/nprogress/nprogress.css" rel="stylesheet" />
+      
+          <link href="../vendors/animate.css/animate.min.css" rel="stylesheet" />-->
+  </head>
+  <body class="login" id="log">
+    <div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <h1>Login Form</h1>
+              <div>
+                <div
+                  *ngIf="
+                    loginForm.get('email').invalid &&
+                    (loginForm.get('email').touched ||
+                      loginForm.get('email').dirty)
+                  "
+                >
+                  <div
+                    *ngIf="loginForm.get('email').getError('required')"
+                    style="color: red; font-size: 10px"
+                  >
+                    champ obligatoire
+                  </div>
+                  <div
+                    *ngIf="loginForm.get('email').getError('email')"
+                    style="color: red; font-size: 10px"
+                  >
+                    champ doit etre un email
+                  </div>
+                </div>
+                <input
+                  [ngClass]="{
+                    'is-valid': loginForm.get('email').valid,
+                    'is-invalid':
+                      loginForm.get('email').invalid &&
+                      (loginForm.get('email').touched ||
+                        loginForm.get('email').dirty)
+                  }"
+                  type="text"
+                  class="form-control"
+                  placeholder="email"
+                  formControlName="email"
+                  autocomplete="off"
+                />
+              </div>
+              <div>
+                <div
+                  *ngIf="
+                    loginForm.get('password').invalid &&
+                    (loginForm.get('password').touched ||
+                      loginForm.get('password').dirty)
+                  "
+                >
+                  <div
+                    *ngIf="loginForm.get('password').getError('minLength')"
+                    style="color: red; font-size: 10px"
+                  >
+                    password contient au 8 charactere
+                  </div>
+                  <div
+                    *ngIf="loginForm.get('password').getError('pattern')"
+                    style="color: red; font-size: 10px"
+                  >
+                    password doit contient un lettre majuscule et un nombre
+                  </div>
+
+                  <div
+                    *ngIf="loginForm.get('password').getError('required')"
+                    style="color: red; font-size: 10px"
+                  >
+                    champ obligatoire
+                  </div>
+                </div>
+                <input
+                  [ngClass]="{
+                    'is-valid': loginForm.get('password').valid,
+                    'is-invalid':
+                      loginForm.get('password').invalid &&
+                      (loginForm.get('password').touched ||
+                        loginForm.get('password').dirty)
+                  }"
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  formControlName="password"
+                  required=""
+                  autocomplete="off"
+                />
+              </div>
+              <div>
+                <button
+                  [disabled]="loginForm.invalid"
+                  type="submit"
+                  class="btn btn-default submit"
+                >
+                  Log in
+                </button>
+              </div>
+              <div class="clearfix"></div>
+              <div class="separator">
+                <div class="clearfix"></div>
+                <br />
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<!-- start Login Page -->
+<!-- end Login Page -->

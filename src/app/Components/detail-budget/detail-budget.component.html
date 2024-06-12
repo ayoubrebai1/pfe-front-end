@@ -1,0 +1,135 @@
+<div class="right_col" style="min-height: 1659px" role="main">
+  <form
+    *ngIf="role == 'responsable'"
+    [formGroup]="DetailForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="form-group row">
+      <label for="fname" class="control-label col-sm-2">Libelle</label>
+      <div class="col-sm-10">
+        <input
+          type="text"
+          class="form-control"
+          id="fname"
+          placeholder="libelle"
+          formControlName="libelle"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="lname" class="control-label col-sm-2">Montant </label>
+      <div class="col-sm-10">
+        <input
+          type="number"
+          class="form-control"
+          id="lname"
+          placeholder="Montant"
+          formControlName="montant_detail_budget"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="type" class="control-label col-sm-2">Type</label>
+      <div class="col-sm-10">
+        <select class="form-control" formControlName="Type">
+          <option [ngValue]="null" disabled>Choisir un type budget</option>
+          <option *ngFor="let type of typeBudget" [ngValue]="type">
+            {{ type.libelle }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="offset-sm-2 col-sm-10 pull-right">
+        <button id="btn" type="submit" class="btn btn-primary btn-block">
+          Ajouter
+        </button>
+      </div>
+    </div>
+  </form>
+  <div id="container">
+    <div class="tablerendering">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Libelle</th>
+            <th scope="col">Montant</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let detail of details">
+          <tr>
+            <td [ngStyle]="{ color: detail.status }">{{ detail.libelle }}</td>
+
+            <td [ngStyle]="{ color: detail.status }">
+              {{ detail.montant_detail_budget | currency: "TND" }}
+            </td>
+
+            <td>
+              <button
+                type="button"
+                class="btn btn-default"
+                style="color: deepskyblue"
+                aria-label="Left Align"
+              >
+                <span
+                  class="far fa-edit"
+                  aria-hidden="true"
+                  data-toggle="modal"
+                  data-target="#exampleModalCenter"
+                ></span>
+              </button>
+              <button
+                type="button"
+                class="btn btn-default"
+                style="color: red"
+                aria-label="Left Align"
+                (click)="removeDetail(detail)"
+              >
+                <span class="far fa-trash-alt" aria-hidden="true"></span>
+              </button>
+              <button
+                [disabled]="role != 'ADMIN'"
+                class="btn btn-raised"
+                style="width: 100px"
+                (click)="ChangeStatus(detail); sendMessage(detail)"
+              >
+                <i *ngIf="detail.status == null" style="color: blue"
+                  >En attente</i
+                >
+                <i *ngIf="detail.status == 'green'" style="color: green"
+                  >Valider</i
+                >
+                <i *ngIf="detail.status == 'red'" style="color: red">Refuser</i>
+              </button>
+              <button
+                *ngIf="role == 'ADMIN' && detail.status == 'red'"
+                class="btn btn-raised"
+                style="width: 200px"
+                (click)="AddArgument(detail)"
+              >
+                envoyer argument
+              </button>
+              <button
+                class="btn btn-raised"
+                style="width: 200px"
+                (click)="RedirectedToMessages(detail)"
+              >
+                voir commentaires
+              </button>
+              <textarea
+                *ngIf="role == 'ADMIN' && detail.status == 'red'"
+                class="form-control"
+                rows="5"
+                id="comment"
+                [disabled]="role != 'ADMIN'"
+                [(ngModel)]="detail.argument"
+              ></textarea>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr />
+    </div>
+  </div>
+</div>

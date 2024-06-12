@@ -1,0 +1,147 @@
+<div class="right_col" style="min-height: 1659px" role="main">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div id="register" class="animate form">
+          <section class="login_content">
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+              <h1>Créer nouveau compt</h1>
+              <div>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="FirstName"
+                  required=""
+                  formControlName="firstName"
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="LastName"
+                  required=""
+                  formControlName="lastName"
+                />
+              </div>
+
+              <div>
+                <div
+                  *ngIf="
+                    userForm.get('email').invalid &&
+                    (userForm.get('email').touched ||
+                      userForm.get('email').dirty)
+                  "
+                >
+                  <div
+                    *ngIf="userForm.get('email').getError('required')"
+                    style="color: red; font-size: 10px"
+                  >
+                    champ obligatoire
+                  </div>
+                  <div
+                    *ngIf="userForm.get('email').getError('email')"
+                    style="color: red; font-size: 10px"
+                  >
+                    champ doit etre un email
+                  </div>
+                </div>
+                <input
+                  [ngClass]="{
+                    'is-valid': userForm.get('email').valid,
+                    'is-invalid':
+                      userForm.get('email').invalid &&
+                      (userForm.get('email').touched ||
+                        userForm.get('email').dirty)
+                  }"
+                  type="email"
+                  class="form-control"
+                  placeholder="Email"
+                  required=""
+                  formControlName="email"
+                />
+              </div>
+              <div>
+                <div
+                  *ngIf="
+                    userForm.get('password').invalid &&
+                    (userForm.get('password').touched ||
+                      userForm.get('password').dirty)
+                  "
+                >
+                  <div
+                    *ngIf="userForm.get('password').getError('minLength')"
+                    style="color: red; font-size: 10px"
+                  >
+                    password contient au 8 charactere
+                  </div>
+                  <div
+                    *ngIf="userForm.get('password').getError('pattern')"
+                    style="color: red; font-size: 10px"
+                  >
+                    password doit contient un lettre majuscule et un nombre
+                  </div>
+
+                  <div
+                    *ngIf="userForm.get('password').getError('required')"
+                    style="color: red; font-size: 10px"
+                  >
+                    champ obligatoire
+                  </div>
+                </div>
+                <input
+                  [ngClass]="{
+                    'is-valid': userForm.get('password').valid,
+                    'is-invalid':
+                      userForm.get('password').invalid &&
+                      (userForm.get('password').touched ||
+                        userForm.get('password').dirty)
+                  }"
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  required=""
+                  formControlName="password"
+                />
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12 col-sm-12">
+                  <select class="form-control" formControlName="role">
+                    <option [ngValue]="null" disabled>
+                      choisit un profile
+                    </option>
+                    <option *ngFor="let rol of roles" [ngValue]="rol">
+                      {{ rol.libelle }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12 col-sm-12">
+                  <select class="form-control" formControlName="centre">
+                    <option [ngValue]="null" disabled>
+                      choisit centre de responsabilite
+                    </option>
+                    <option
+                      *ngFor="let centre of centres_responsabilite"
+                      [ngValue]="centre"
+                    >
+                      {{ centre.libelle_centre_responsabilite }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-default submit">
+                  Enregistrer
+                </button>
+              </div>
+              <div class="clearfix"></div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

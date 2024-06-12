@@ -1,0 +1,47 @@
+<div class="right_col" style="min-height: 1659px" role="main">
+
+<div class="tablerendering">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Numero</th>
+          <th scope="col">Libelle du budget</th>
+          <th scope="col">Montant du budget</th>
+          <th scope="col">Vote</th>
+          <th scope="col">Détails</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let budget of budgets">
+          <td>{{budget.id_budget}}</td>
+          <td>{{ budget.libelle_budget }}</td>
+          <td>{{ budget.montant_total | currency: "TND" }}</td>
+          <td>
+            <button type="button" class="btn btn-default" style="color:deepskyblue" aria-label="Left Align">
+                <span class="fa fa-check" aria-hidden="true" data-toggle="modal" data-target="#exampleModalCenter"></span>
+              </button><button
+            type="button"
+            class="btn btn-default"
+            style="color: red"
+            aria-label="Left Align"
+            (click)="deleteCR(cr.id_centre_responsabilite)"
+          >
+            <span class="fa fa-ban" aria-hidden="true"></span>
+          </button>
+        
+        </td>
+          <td>
+            <!-- <button type="button" class="btn btn-default" style="color:deepskyblue" aria-label="Left Align">
+            <span class="far fa-edit" aria-hidden="true" data-toggle="modal" data-target="#exampleModalCenter"></span>
+          </button> -->
+          <button type="button" class="btn btn-default" style="color:deepskyblue" aria-label="Left Align">
+            Détails
+          </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+  </div>
+</div>

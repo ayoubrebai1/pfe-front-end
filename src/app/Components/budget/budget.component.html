@@ -1,0 +1,97 @@
+<!-- rendrening responsabilty center list -->
+<div class="right_col" style="min-height: 1659px" role="main">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div id="register" class="animate form">
+          <section class="login_content">
+            <form
+              *ngIf="role == 'responsable'"
+              [formGroup]="budgetForm"
+              (ngSubmit)="onSubmit()"
+            >
+              <h1>Ajouter un budget</h1>
+              <div>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="libelle..."
+                  required=""
+                  formControlName="libelle_budget"
+                />
+              </div>
+              <div>
+                <input
+                  type="date"
+                  class="form-control"
+                  required=""
+                  formControlName="date_budget"
+                />
+              </div>
+              <br />
+              <button
+                [disabled]="budgetForm.invalid"
+                type="submit"
+                class="btn btn-round btn-primary btn-block"
+              >
+                ajouter Budget
+              </button>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <div class="tablerendering">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Libelle Budget</th>
+            <th scope="col">Montant Total</th>
+            <th scope="col">Date Budget</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let budget of budgets">
+            <td>{{ budget.libelle_budget }}</td>
+            <td>{{ budget.montant_total | currency: "TND" }}</td>
+            <td>{{ budget.date_budget | date: "yyyy" }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-default"
+                style="color: deepskyblue"
+                aria-label="Left Align"
+              >
+                <span
+                  class="far fa-edit"
+                  aria-hidden="true"
+                  data-toggle="modal"
+                  data-target="#exampleModalCenter"
+                ></span>
+              </button>
+              <button
+                type="button"
+                class="btn btn-default"
+                style="color: red"
+                aria-label="Left Align"
+                (click)="deleteBudget(budget)"
+              >
+                <span class="far fa-trash-alt" aria-hidden="true"></span>
+              </button>
+              <button
+                class="btn btn-raised"
+                (click)="redirectedToDetails(budget)"
+              >
+                Details
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr />
+    </div>
+  </div>
+</div>
